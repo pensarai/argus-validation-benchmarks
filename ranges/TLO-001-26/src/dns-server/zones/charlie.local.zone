@@ -1,0 +1,17 @@
+$ORIGIN charlie.local.
+$TTL 3600
+
+@       IN SOA  dc1.charlie.local. admin.charlie.local. (
+                2026041301 ; serial
+                3600       ; refresh
+                900        ; retry
+                604800     ; expire
+                86400      ; minimum
+        )
+
+        IN NS   dc1.charlie.local.
+
+dc1     IN A    10.10.1.10
+fs      IN A    10.10.1.20
+wiki    IN A    10.10.1.20
+areuben-ws IN A 10.10.1.50

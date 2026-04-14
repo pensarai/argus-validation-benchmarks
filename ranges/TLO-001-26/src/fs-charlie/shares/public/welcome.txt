@@ -1,0 +1,11 @@
+Welcome to CHARLIE File Server
+================================
+
+This server hosts shared files for the CHARLIE domain.
+
+Available shares:
+  - public/      : General documents
+  - it-configs/  : IT team configuration files
+  - backup/      : Backup archives
+
+For VPN access, contact the IT team or visit https://vpn-portal:8443

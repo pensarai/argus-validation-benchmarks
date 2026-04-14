@@ -1,0 +1,18 @@
+$ORIGIN alpha.local.
+$TTL 3600
+
+@       IN SOA  dd1.alpha.local. admin.alpha.local. (
+                2026041301 ; serial
+                3600       ; refresh
+                900        ; retry
+                604800     ; expire
+                86400      ; minimum
+        )
+
+        IN NS   dd1.alpha.local.
+
+dd1     IN A    10.10.3.10
+gitlab  IN A    10.10.3.20
+teamcity IN A  10.10.3.21
+xy1     IN A    10.10.3.50
+secrets IN A    10.10.3.100
