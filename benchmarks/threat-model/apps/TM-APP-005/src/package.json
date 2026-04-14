@@ -1,0 +1,28 @@
+{
+  "name": "tm-app-005-image-processing-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serverless image processing pipeline with AWS SAM",
+  "scripts": {
+    "build": "sam build",
+    "build:local": "tsc --project tsconfig.json",
+    "deploy": "sam deploy",
+    "deploy:staging": "sam deploy --config-env staging",
+    "deploy:prod": "sam deploy --config-env prod",
+    "local": "sam local start-api",
+    "test": "jest --config jest.config.js",
+    "lint": "eslint 'functions/**/*.ts' 'shared/**/*.ts'",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11",
+    "ts-jest": "^29.1.1",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0"
+  }
+}

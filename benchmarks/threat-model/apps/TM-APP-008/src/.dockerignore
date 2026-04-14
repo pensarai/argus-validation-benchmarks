@@ -1,0 +1,13 @@
+node_modules
+dist
+.turbo
+*.log
+.env
+.env.local
+packages/mobile-client
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+.git
+.github

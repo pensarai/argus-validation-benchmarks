@@ -1,0 +1,32 @@
+{
+  "name": "@app/admin-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React 18 admin dashboard for platform administration",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --port 5174",
+    "preview": "vite preview",
+    "lint": "eslint src/ --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@app/shared-types": "workspace:*",
+    "@tanstack/react-query": "^5.17.0",
+    "axios": "^1.6.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.0",
+    "recharts": "^2.10.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11"
+  }
+}

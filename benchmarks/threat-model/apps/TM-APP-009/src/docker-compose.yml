@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tm-app-009
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgresql://tmuser:tmpass@postgres:5432/tmapp?sslmode=disable
+      - JWT_SECRET=f84a3b7c9e0d2a1b5f6e8c7d4a3b2e1f9c8d7a6b5e4f3c2d1a0b9e8f7c6d5a4
+      - JWT_EXPIRY=1h
+      - UPLOAD_DIR=/app/uploads
+      - LOG_LEVEL=info
+      - BCRYPT_COST=12
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: tm-app-009-db
+    environment:
+      - POSTGRES_USER=tmuser
+      - POSTGRES_PASSWORD=tmpass
+      - POSTGRES_DB=tmapp
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tmuser -d tmapp"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge
