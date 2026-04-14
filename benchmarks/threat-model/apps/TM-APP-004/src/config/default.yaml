@@ -1,0 +1,20 @@
+name: default-pipeline
+version: "1.0.0"
+
+resources:
+  - name: sample-data
+    url: https://httpbin.org/json
+    headers:
+      Accept: application/json
+
+transforms:
+  - name: clean-whitespace
+    type: trim
+
+  - name: normalize-case
+    type: lowercase
+
+output_settings:
+  format: json
+  pretty: true
+  include_metadata: true

@@ -1,0 +1,49 @@
+# Example configuration demonstrating all features.
+#
+# Include a base config. The included file's fields are merged,
+# with this file's fields taking precedence on conflicts.
+include: ./default.yaml
+
+name: example-pipeline
+version: "2.1.0"
+
+resources:
+  - name: api-response
+    url: https://jsonplaceholder.typicode.com/posts/1
+    headers:
+      Accept: application/json
+      User-Agent: fileproc/0.5.2
+
+  - name: user-data
+    url: https://jsonplaceholder.typicode.com/users/1
+
+transforms:
+  - name: clean-whitespace
+    type: trim
+
+  - name: strip-tags
+    type: regex_replace
+    params:
+      pattern: "<[^>]+>"
+      replacement: ""
+
+  - name: normalize
+    type: lowercase
+
+  - name: add-header
+    type: custom
+    params:
+      expression: "prefix:--- PROCESSED ---\n"
+
+# Plugin configuration (shared library must be present at runtime).
+# Uncomment to enable:
+#
+# plugins:
+#   - name: custom-filter
+#     version: "1.0"
+#     path: /usr/local/lib/fileproc/custom_filter.so
+
+output_settings:
+  format: json
+  pretty: true
+  include_metadata: true
