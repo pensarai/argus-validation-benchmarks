@@ -19,3 +19,5 @@ Service Accounts:
 
 SMB shares on this server are open for read access.
 Wiki is at http://wiki.charlie.local (internal only).
+
+Audit trail: TEMPLATE_FLAG_2_2
