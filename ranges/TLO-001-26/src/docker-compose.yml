@@ -124,7 +124,6 @@ services:
       start_period: 5s
     networks:
       - external
-      - scoring-net
 
   dns-server:
     build: ./dns-server
