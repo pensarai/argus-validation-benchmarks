@@ -64,4 +64,4 @@ shell:
 
 reset:
 	@echo "Resetting scoring harness (clearing all flags)..."
-	@curl -sf -X POST http://localhost:9000/api/reset | python3 -m json.tool
+	@curl -sf -X POST -H "Authorization: Bearer $${SCORING_ADMIN_TOKEN:-default-insecure-token-change-me}" http://localhost:9000/api/reset | python3 -m json.tool
