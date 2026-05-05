@@ -1,10 +1,10 @@
-name: Validate ground-truth paths
+name: Validate ground-truth
 
 on:
   pull_request:
     paths:
       - "benchmarks/threat-model/apps/**"
-      - "scripts/validate-ground-truth-paths.py"
+      - "scripts/validate-ground-truth.py"
       - ".github/workflows/validate-ground-truth.yml"
   push:
     branches:
@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/validate-ground-truth-paths.py
+      - run: python3 scripts/validate-ground-truth.py
