@@ -140,11 +140,14 @@ def check_type_uniformity(
     total = sum(len(v) for v in observations.values())
     for path, entries in sorted(observations.items()):
         types_seen = sorted({t for t, _ in entries})
-        # `list[?]` (empty list) is compatible with any concrete `list[<T>]` —
-        # an empty list doesn't constrain the element type. Drop it from the
-        # types-seen set unless it's the *only* type observed.
-        non_empty = [t for t in types_seen if t != "list[?]"]
-        effective_types = types_seen if not non_empty else non_empty
+        # `list[?]` (empty list) is compatible with any concrete `list[<T>]`
+        # because the empty list doesn't constrain the element type. It is NOT
+        # compatible with scalar types — `[]` vs `"hello"` is real drift.
+        others = [t for t in types_seen if t != "list[?]"]
+        if "list[?]" in types_seen and others and all(t.startswith("list[") for t in others):
+            effective_types = others  # ignore the empty-list observations
+        else:
+            effective_types = types_seen
         if len(set(effective_types)) > 1:
             by_type: dict[str, list[str]] = defaultdict(list)
             for t, loc in entries:
