@@ -1,0 +1,26 @@
+{
+  "name": "argus-validation-benchmarks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Argus validation benchmarks — tooling for the attack-surface catalog and ground-truth artifacts.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "validate:attack-surface": "bun run scripts/validate-attack-surface.ts",
+    "bootstrap:attack-surface": "bun run scripts/bootstrap-attack-surface.ts",
+    "validate:ground-truth": "python3 scripts/validate-ground-truth.py"
+  },
+  "dependencies": {
+    "@pensar/surface": "0.2.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "bun": ">=1.1"
+  }
+}
