@@ -9,8 +9,8 @@ import type { ApolloServerPlugin } from '@apollo/server';
  *
  * Maximum depth: 10
  *
-
-
+ * NOTE: This plugin must be included in the ApolloServer plugins array
+ * for it to take effect. Import alone is not sufficient.
  */
 
 const MAX_DEPTH = 10;

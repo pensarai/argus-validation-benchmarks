@@ -50,7 +50,7 @@ Resources:
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-
+              # TODO: Scope these down before production launch
               - Effect: Allow
                 Action:
                   - 's3:*'

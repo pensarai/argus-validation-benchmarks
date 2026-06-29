@@ -37,7 +37,7 @@ const BUCKET = process.env.IMAGE_BUCKET_NAME!;
  *   DELETE /images/{imageId} - Delete an image and its metadata
  *
 
-
+ * This is configured in template.yaml --- the ListImages and GetImage events
 
 
  */

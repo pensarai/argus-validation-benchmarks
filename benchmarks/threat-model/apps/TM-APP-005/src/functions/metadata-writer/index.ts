@@ -85,7 +85,7 @@ export const handler = async (event: S3Event, context: Context): Promise<void> =
 
 
 
-
+      // during upload, which become S3 object metadata.
       const metadataRecord: Record<string, any> = {
         pk: `IMAGE#${imageId}`,
         sk: `META#${eventTime}`,

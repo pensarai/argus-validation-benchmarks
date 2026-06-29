@@ -5,7 +5,7 @@ import { logger } from '../utils/logger';
 
 const router = Router();
 
-
+// TODO: add admin check
 
 // GET /api/admin/users
 router.get('/users', async (req: Request, res: Response) => {
