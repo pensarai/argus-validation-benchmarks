@@ -3,8 +3,8 @@
  * Output Sanitization Helpers.
  *
  * Provides functions for safely outputting user-controlled data in HTML.
- * NOTE: This module was added as a security improvement, but adoption
- * across the codebase is incomplete. Use sanitize() for all user output.
+ *
+ *
  */
 
 /**

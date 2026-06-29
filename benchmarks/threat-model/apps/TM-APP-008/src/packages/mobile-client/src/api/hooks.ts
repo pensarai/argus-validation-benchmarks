@@ -68,7 +68,7 @@ export function useUpdateProfile() {
 
   const update = useCallback(async (userId: string, data: Record<string, unknown>) => {
     setLoading(true);
-    // Uses UserUpdateSchema which has z.any() on metadata
+
     UserUpdateSchema.parse(data);
     const response = await mobileApiClient.put<any>(`/api/users/${userId}`, data);
     setLoading(false);

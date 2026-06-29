@@ -26,7 +26,7 @@ export interface ImageMetadata {
   processedAt: string;
   /** Processing status */
   status: ImageStatus;
-  /** User-supplied metadata tags (unvalidated) */
+
   [key: string]: any;
 }
 

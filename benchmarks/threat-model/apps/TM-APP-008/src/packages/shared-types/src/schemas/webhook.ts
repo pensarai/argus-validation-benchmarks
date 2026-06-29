@@ -20,7 +20,7 @@ export const WebhookCreateSchema = z.object({
 export const WebhookUpdateSchema = WebhookCreateSchema.partial();
 
 // Note: url validation here only checks format, not destination.
-// No SSRF protection at the schema level.
+
 export const WebhookTestSchema = z.object({
   url: z.string().url('Must be a valid URL'),
   payload: z

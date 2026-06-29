@@ -83,7 +83,7 @@ export const updateUserSchema = z.object({
   bio: z.string().max(1000).optional(),
 });
 
-// Search schema (exists but is NOT applied to the search route)
+
 export const searchSchema = z.object({
   q: z
     .string()

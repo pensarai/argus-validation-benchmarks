@@ -14,7 +14,7 @@ use super::AppConfig;
 /// - plugin name and version fields are present
 ///
 /// This does NOT validate:
-/// - plugin paths (no allowlist, no path traversal check)
+/// - plugin paths
 /// - include paths (handled before this stage)
 /// - custom transform parameters (opaque serde_yaml::Value)
 pub fn validate_config(config: &AppConfig) -> Result<()> {
@@ -69,7 +69,7 @@ pub fn validate_config(config: &AppConfig) -> Result<()> {
         if plugin.version.is_empty() {
             return Err(anyhow!("Plugin '{}' has empty 'version'", plugin.name));
         }
-        // Note: plugin.path is NOT validated here. It is trusted from config.
+
         if !plugin.path.is_empty() {
             debug!("Plugin '{}' path: {}", plugin.name, plugin.path);
         }

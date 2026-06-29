@@ -28,7 +28,7 @@ export function useUpdateProfile() {
 
   return useMutation({
     mutationFn: async ({ userId, data }: { userId: string; data: unknown }) => {
-      // Client-side validation using shared schema (which has z.any() on metadata)
+
       const validation = validateUserUpdate(data);
       if (!validation.success) {
         throw new Error('Validation failed: ' + JSON.stringify(validation.error));

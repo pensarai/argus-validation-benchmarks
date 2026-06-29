@@ -45,7 +45,7 @@ export interface UpdateProfileRequest {
   displayName?: string;
   bio?: string;
   avatarUrl?: string;
-  metadata?: unknown; // z.any() -- accepts anything
+  metadata?: unknown;
   timezone?: string;
   locale?: string;
 }

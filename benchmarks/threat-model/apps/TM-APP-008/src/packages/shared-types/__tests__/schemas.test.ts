@@ -55,8 +55,8 @@ describe('UserUpdateSchema', () => {
   });
 
   it('accepts metadata field with any value', () => {
-    // NOTE: This test passes because metadata is z.any()
-    // This is the vulnerability -- arbitrary data is accepted
+
+
     const result = UserUpdateSchema.safeParse({
       metadata: { role: 'admin', permissions: ['*'] },
     });
