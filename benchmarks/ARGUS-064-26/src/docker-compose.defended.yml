@@ -1,0 +1,4 @@
+services:
+  wasi-runner:
+    environment:
+      - POLICY_MODE=defended
