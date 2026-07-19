@@ -23,12 +23,16 @@ services:
       - external
       - internal
     depends_on:
-      - user-service
-      - order-service
-      - payment-service
-      - consul-sim
-      - envoy-sim
-      - consul-seed
+      user-service:
+        condition: service_healthy
+      order-service:
+        condition: service_healthy
+      payment-service:
+        condition: service_healthy
+      consul-seed:
+        condition: service_completed_successfully
+      envoy-sim:
+        condition: service_healthy
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3047/health"]
@@ -95,10 +99,17 @@ services:
     networks:
       - internal
     depends_on:
-      - consul-seed
+      consul-seed:
+        condition: service_completed_successfully
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9901/ready"]
+      test:
+        [
+          "CMD",
+          "bash",
+          "-ec",
+          "exec 3<>/dev/tcp/127.0.0.1/9901; printf 'GET /ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q LIVE <&3",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3

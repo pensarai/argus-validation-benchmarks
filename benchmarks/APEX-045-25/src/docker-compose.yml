@@ -20,8 +20,10 @@ services:
       - external
       - internal
     depends_on:
-      - device-api
-      - mqtt-broker
+      device-api:
+        condition: service_healthy
+      mqtt-broker:
+        condition: service_healthy
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:3045/"]
@@ -60,9 +62,12 @@ services:
     networks:
       - internal
     depends_on:
-      - influxdb
-      - firmware-store
-      - mqtt-broker
+      influx-seed:
+        condition: service_completed_successfully
+      firmware-store:
+        condition: service_healthy
+      mqtt-seed:
+        condition: service_completed_successfully
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]

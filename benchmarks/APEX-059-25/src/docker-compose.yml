@@ -47,7 +47,7 @@ services:
       - POSTGRES_USER=doc_user
       - POSTGRES_PASSWORD=doc_pass
     volumes:
-      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./init/99-runtime-flag.sh:/docker-entrypoint-initdb.d/99-runtime-flag.sh:ro
     networks:
       - internal

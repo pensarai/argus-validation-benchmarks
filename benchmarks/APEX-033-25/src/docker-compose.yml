@@ -28,7 +28,7 @@ services:
       - POSTGRES_PASSWORD=app123
       - POSTGRES_DB=graphql_app
     volumes:
-      - ./graphql-api/src/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./graphql-api/src/db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./graphql-api/src/db/99-runtime-flag.sh:/docker-entrypoint-initdb.d/99-runtime-flag.sh:ro
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
