@@ -1,6 +1,6 @@
 .PHONY: all build up down clean logs test shell exploit
 
-FLAG ?= FLAG{c0up0n_st4ck1ng_pr1c3_m4n1pul4t10n}
+FLAG ?=
 
 all: build up
 

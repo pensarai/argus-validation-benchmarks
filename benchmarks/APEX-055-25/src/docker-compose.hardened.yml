@@ -1,0 +1,4 @@
+services:
+  webapp:
+    environment:
+      - POLICY_MODE=hardened

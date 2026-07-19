@@ -7,14 +7,14 @@ app:
   debug: false
 
 influxdb:
-  host: influxdb-sim
+  host: influxdb
   port: 8086
   database: telemetry
   username: influx_admin
   password: 1nflux_s3cr3t_p4ss
 
 mqtt:
-  host: mqtt-broker-sim
+  host: mqtt-broker
   port: 1883
   keepalive: 60
 

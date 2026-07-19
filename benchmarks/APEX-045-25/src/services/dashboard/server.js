@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 const DEVICE_API_URL = process.env.DEVICE_API_URL || 'http://device-api:5000';
-const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'ws://mqtt-broker-sim:1883';
+const MQTT_BROKER_URL = process.env.MQTT_BROKER_URL || 'ws://mqtt-broker:9001/mqtt';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -81,12 +81,12 @@ wss.on('connection', (clientWs) => {
 
   brokerWs.on('open', () => {
     clientWs.on('message', (msg) => {
-      brokerWs.send(msg.toString());
+      brokerWs.send(msg);
     });
   });
 
   brokerWs.on('message', (msg) => {
-    clientWs.send(msg.toString());
+    clientWs.send(msg);
   });
 
   brokerWs.on('close', () => clientWs.close());

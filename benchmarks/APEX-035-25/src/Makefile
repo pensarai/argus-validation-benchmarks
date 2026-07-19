@@ -6,7 +6,7 @@
 COMPOSE = docker-compose
 PROJECT = apex-035-25
 
-FLAG ?= FLAG{race_condition_toctou_inventory_bypass_2025}
+FLAG ?=
 
 build:
 	@echo "Building $(PROJECT)..."

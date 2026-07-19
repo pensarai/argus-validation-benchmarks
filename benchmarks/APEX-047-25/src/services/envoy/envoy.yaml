@@ -1,0 +1,43 @@
+admin:
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+  access_log_path: /tmp/envoy-admin.log
+static_resources:
+  clusters:
+    - name: user-service
+      connect_timeout: 2s
+      type: STRICT_DNS
+      load_assignment:
+        cluster_name: user-service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: user-service, port_value: 3001 }
+    - name: order-service
+      connect_timeout: 2s
+      type: STRICT_DNS
+      load_assignment:
+        cluster_name: order-service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: order-service, port_value: 3002 }
+    - name: payment-service
+      connect_timeout: 2s
+      type: STRICT_DNS
+      metadata:
+        filter_metadata:
+          argus.mesh:
+            mtls_required: true
+            cert_kv_path: envoy/certs/payment-service
+      load_assignment:
+        cluster_name: payment-service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: payment-service, port_value: 3003 }

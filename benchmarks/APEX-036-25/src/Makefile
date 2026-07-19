@@ -1,6 +1,6 @@
 .PHONY: build run stop clean test logs
 
-FLAG ?= FLAG{mfa_bypass_client_side_trust_is_not_security_4d5e6f7a}
+FLAG ?=
 
 build:
 	docker-compose build --build-arg FLAG=$(FLAG)

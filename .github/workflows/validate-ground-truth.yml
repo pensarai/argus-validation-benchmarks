@@ -21,4 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/validate-ground-truth.py
-      - run: python3 scripts/validate-benchmarks-v2.py
+      - run: python3 scripts/validate-benchmarks-v2.py --require-all-v2
