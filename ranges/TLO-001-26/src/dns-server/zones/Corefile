@@ -1,0 +1,20 @@
+charlie.local {
+    file /etc/coredns/zones/charlie.local.zone
+    log
+}
+
+oscar.local {
+    file /etc/coredns/zones/oscar.local.zone
+    log
+}
+
+alpha.local {
+    file /etc/coredns/zones/alpha.local.zone
+    log
+}
+
+. {
+    forward . 8.8.8.8 8.8.4.4
+    log
+    cache 30
+}
