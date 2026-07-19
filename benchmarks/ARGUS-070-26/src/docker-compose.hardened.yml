@@ -1,0 +1,4 @@
+services:
+  origin:
+    environment:
+      - POLICY_MODE=hardened

@@ -1,0 +1,4 @@
+services:
+  mobile-backend:
+    environment:
+      - POLICY_MODE=defended

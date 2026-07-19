@@ -1,0 +1,4 @@
+services:
+  ops-api:
+    environment:
+      - POLICY_MODE=hardened
