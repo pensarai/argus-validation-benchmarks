@@ -1,0 +1,4 @@
+services:
+  protocol-gateway:
+    environment:
+      - POLICY_MODE=hardened

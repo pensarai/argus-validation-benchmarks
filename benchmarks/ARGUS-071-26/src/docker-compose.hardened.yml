@@ -1,0 +1,4 @@
+services:
+  promoter:
+    environment:
+      - POLICY_MODE=hardened

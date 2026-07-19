@@ -1,0 +1,16 @@
+version: 2.7.0
+apkFileName: field-vault.apk
+isFrameworkApk: false
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: '26'
+  targetSdkVersion: '35'
+packageInfo:
+  forcedPackageId: '127'
+versionInfo:
+  versionCode: '20801'
+  versionName: 2.8.1
+doNotCompress:
+- resources.arsc

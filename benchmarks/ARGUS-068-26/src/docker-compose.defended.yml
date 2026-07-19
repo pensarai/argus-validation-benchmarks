@@ -1,0 +1,4 @@
+services:
+  model-gateway:
+    environment:
+      - POLICY_MODE=defended

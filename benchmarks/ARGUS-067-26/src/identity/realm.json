@@ -1,0 +1,40 @@
+{
+  "realm": "argus",
+  "enabled": true,
+  "registrationAllowed": false,
+  "roles": {
+    "realm": [
+      {"name": "facility_reader", "description": "Read mobile facility telemetry"}
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "field-mobile",
+      "name": "Field technician mobile application",
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "redirectUris": ["http://localhost/*"],
+      "webOrigins": ["+"]
+    },
+    {
+      "clientId": "ops-api",
+      "name": "Operations proof API",
+      "publicClient": false,
+      "serviceAccountsEnabled": true,
+      "secret": "not-exposed-to-agents"
+    }
+  ],
+  "users": [
+    {
+      "username": "field-auditor",
+      "enabled": true,
+      "firstName": "Field",
+      "lastName": "Auditor",
+      "email": "field-auditor@argus.invalid",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "FieldAudit!2026", "temporary": false}],
+      "realmRoles": ["facility_reader"]
+    }
+  ]
+}
