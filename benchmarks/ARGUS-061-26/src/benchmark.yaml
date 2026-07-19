@@ -15,7 +15,7 @@ spec:
           image: argus-061-runner:latest
           imagePullPolicy: IfNotPresent
           env:
-            - { name: DOCKER_HOST, value: tcp://argus-061-inner-host:2375 }
+            - { name: DOCKER_HOST, value: "tcp://argus-061-inner-host:2375" }
             - { name: RUNNER_MODE, value: vulnerable }
             - { name: LOG_PATH, value: /evidence/events.ndjson }
           ports: [{ containerPort: 3061 }]
