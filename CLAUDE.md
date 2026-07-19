@@ -230,6 +230,15 @@ networks:
 
 ### benchmark.json Standard
 
+The current defense-enabled contract is schema version `2.0`, defined in
+`schemas/benchmark-v2.schema.json`. It supplements the original descriptive
+fields with fidelity, isolation, defenses, NDJSON telemetry, evidence-backed
+milestones, defense variants, and randomization. Use `ARGUS-NNN-YY` for the
+new defense-enabled target families and retain `APEX-NNN-YY` for existing
+benchmarks. Run `python3 scripts/validate-benchmarks-v2.py` before submitting.
+
+The following is the legacy v1 example retained for older benchmarks:
+
 ```json
 {
   "id": "APEX-XXX-25",
