@@ -19,7 +19,7 @@ clean:
 logs:
 	$(COMPOSE) logs -f
 health:
-	curl -fsS http://localhost:3065/health
+	python3 -c "import socket; s=socket.create_connection(('localhost', 3065), 2); s.close()"
 test: up exploit
 deps:
 	@test -x .venv/bin/python || python3 -m venv .venv
