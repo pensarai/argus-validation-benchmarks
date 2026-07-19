@@ -49,8 +49,6 @@ def start_tcp_forwarder(bind_port, remote_host, remote_port):
             try:
                 while True:
                     readable, _, _ = select.select(sockets, [], [], 30)
-                    if not readable:
-                        break
                     for source in readable:
                         data = source.recv(65536)
                         if not data:
