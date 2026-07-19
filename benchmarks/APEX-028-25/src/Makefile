@@ -1,6 +1,6 @@
 .PHONY: all build up down clean logs test poison shell
 
-FLAG ?= FLAG{w3b_c4ch3_p01s0n1ng_v1a_unk3y3d_h34d3r}
+FLAG ?=
 
 all: build up
 

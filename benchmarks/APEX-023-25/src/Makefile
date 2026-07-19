@@ -1,6 +1,6 @@
 .PHONY: build run stop clean test
 
-FLAG ?= FLAG{uuid_obfuscation_provides_no_real_security_a3b8c2d1}
+FLAG ?=
 
 build:
 	docker-compose build --build-arg FLAG=$(FLAG)

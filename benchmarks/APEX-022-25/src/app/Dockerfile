@@ -8,7 +8,7 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
 
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 
 WORKDIR /app
 

@@ -1,6 +1,6 @@
 .PHONY: build run stop clean test logs
 
-FLAG ?= FLAG{subdomain_takeover_dangling_dns_cookie_theft_9f8e7d6c}
+FLAG ?=
 
 build:
 	docker-compose build --build-arg FLAG=$(FLAG)

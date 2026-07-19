@@ -1,7 +1,7 @@
 .PHONY: all build up down clean logs test shell
 
 # Default flag value
-FLAG ?= FLAG{sp3l_1nj3ct10n_t0_rc3_v1a_java_exp0}
+FLAG ?=
 
 all: build up
 

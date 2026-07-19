@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 ENV FLAG=${FLAG}
 
 WORKDIR /app
