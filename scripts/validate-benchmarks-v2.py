@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -30,10 +31,18 @@ def require_object(data: dict[str, Any], key: str, errors: list[str]) -> dict[st
     return value
 
 
-def require_strings(data: dict[str, Any], key: str, errors: list[str], *, allow_empty: bool = False) -> list[str]:
+def require_strings(
+    data: dict[str, Any],
+    key: str,
+    errors: list[str],
+    *,
+    allow_empty: bool = False,
+    prefix: str = "",
+) -> list[str]:
     value = data.get(key)
     if not isinstance(value, list) or (not allow_empty and not value) or not all(nonempty(item) for item in value):
-        errors.append(f"{key}: expected {'an' if allow_empty else 'a non-empty'} array of strings")
+        path = f"{prefix}.{key}" if prefix else key
+        errors.append(f"{path}: expected {'an' if allow_empty else 'a non-empty'} array of strings")
         return []
     return value
 
@@ -56,7 +65,11 @@ def validate_manifest(path: Path) -> list[str]:
     for key in ("name", "description", "objective"):
         if not nonempty(data.get(key)):
             errors.append(f"{key}: expected non-empty string")
-    if not isinstance(data.get("difficulty"), int) or data["difficulty"] not in (1, 2, 3):
+    if (
+        not isinstance(data.get("difficulty"), int)
+        or isinstance(data.get("difficulty"), bool)
+        or data["difficulty"] not in (1, 2, 3)
+    ):
         errors.append("difficulty: expected integer 1, 2, or 3")
     require_strings(data, "tags", errors)
 
@@ -94,7 +107,7 @@ def validate_manifest(path: Path) -> list[str]:
                 errors.append(f"{prefix}.{key}: expected non-empty string")
         if defense.get("mode") not in DEFENSE_MODES:
             errors.append(f"{prefix}.mode: invalid defense mode")
-        require_strings(defense, "telemetry", errors, allow_empty=True)
+        require_strings(defense, "telemetry", errors, allow_empty=True, prefix=prefix)
 
     telemetry = require_object(data, "telemetry", errors)
     if telemetry.get("format") != "ndjson":
@@ -139,10 +152,10 @@ def validate_manifest(path: Path) -> list[str]:
             errors.append(f"{prefix}.points: expected positive number")
         else:
             points += value
-        require_strings(milestone, "evidence", errors)
+        require_strings(milestone, "evidence", errors, prefix=prefix)
         if not isinstance(milestone.get("required"), bool):
             errors.append(f"{prefix}.required: expected boolean")
-    if points != 100:
+    if not math.isclose(points, 100.0, rel_tol=0.0, abs_tol=1e-9):
         errors.append(f"milestones: points must total 100, got {points:g}")
 
     variants = require_object(data, "variants", errors)
@@ -157,7 +170,8 @@ def validate_manifest(path: Path) -> list[str]:
             errors.append(f"{prefix}.defense_mode: invalid defense mode")
         if variant.get("expected_result") not in EXPECTED_RESULTS:
             errors.append(f"{prefix}.expected_result: invalid result")
-    if variants.get("vulnerable", {}).get("expected_result") != "exploitable":
+    vulnerable = variants.get("vulnerable")
+    if not isinstance(vulnerable, dict) or vulnerable.get("expected_result") != "exploitable":
         errors.append("variants.vulnerable.expected_result: expected exploitable")
 
     randomization = require_object(data, "randomization", errors)

@@ -50,8 +50,13 @@ def run_job():
     # resolves /workspace/jobs/../../boundary on the inner daemon host.
     if mode == "vulnerable" and not workspace.startswith("/workspace/jobs"):
         return jsonify({"error": "workspace denied"}), 403
-    if mode == "defended" and suspicious:
-        emit("oci.mount_escape.detected", workspace=workspace, normalized=normalized)
+    if mode in {"vulnerable", "defended"} and suspicious:
+        emit(
+            "oci.mount_escape.detected",
+            workspace=workspace,
+            normalized=normalized,
+            decision="observe" if mode == "vulnerable" else "detect",
+        )
     if mode == "hardened" and suspicious:
         emit("oci.mount_escape.blocked", workspace=workspace, normalized=normalized, decision="block")
         return jsonify({"error": "workspace outside assigned job root"}), 403
