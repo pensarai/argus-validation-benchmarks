@@ -43,13 +43,15 @@ class GatewayHandler(BaseHTTPRequestHandler):
             if ip:
                 authorized_ips.add(ip)
                 print(f"[+] Authorized IP: {ip} — VPN tunnel simulated")
-                # In a real setup, we'd add iptables rules here.
-                # In Docker Compose, the network connectivity is already
-                # configured — this just tracks authorization state.
+                print(json.dumps({
+                    "event": "tlo.vpn.authorized",
+                    "client_ip": ip,
+                    "transport": "ssh-socks5",
+                }), flush=True)
                 self.send_json(200, {
                     "status": "authorized",
                     "ip": ip,
-                    "message": "VPN tunnel established. Internal networks accessible.",
+                    "message": "VPN access authorized. Use the downloaded profile's encrypted SOCKS transport.",
                 })
             else:
                 self.send_json(400, {"error": "ip required"})
