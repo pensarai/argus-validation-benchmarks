@@ -39,8 +39,8 @@
       "properties": {
         "tier": { "enum": ["behavioral", "protocol", "product", "boundary"] },
         "rationale": { "type": "string", "minLength": 1 },
-        "real_components": { "type": "array", "items": { "type": "string" } },
-        "simulated_components": { "type": "array", "items": { "type": "string" } },
+        "real_components": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "simulated_components": { "type": "array", "items": { "type": "string", "minLength": 1 } },
         "protocols": { "type": "array", "items": { "type": "string", "minLength": 1 } }
       },
       "additionalProperties": false

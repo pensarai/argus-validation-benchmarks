@@ -58,11 +58,11 @@ def milestone_completed(milestone_id):
 
 
 def highest_completed_milestone():
-    """Return the highest fully completed milestone number."""
-    for m in range(9, 0, -1):
-        if milestone_completed(m):
-            return m
-    return 0
+    """Return the highest consecutively completed milestone number."""
+    for milestone in range(1, 10):
+        if not milestone_completed(milestone):
+            return milestone - 1
+    return 9
 
 
 def furthest_step():
