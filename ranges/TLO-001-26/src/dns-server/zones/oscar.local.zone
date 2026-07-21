@@ -1,0 +1,18 @@
+$ORIGIN oscar.local.
+$TTL 3600
+
+@       IN SOA  dc1.oscar.local. admin.oscar.local. (
+                2026041301 ; serial
+                3600       ; refresh
+                900        ; retry
+                604800     ; expire
+                86400      ; minimum
+        )
+
+        IN NS   dc1.oscar.local.
+
+dc1     IN A    10.10.2.10
+web     IN A    10.10.2.20
+db      IN A    10.10.2.21
+hardhat IN A    10.10.2.30
+operator-ws1 IN A 10.10.2.50
