@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # Build argument for flag injection
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 ENV FLAG=${FLAG}
 
 WORKDIR /app

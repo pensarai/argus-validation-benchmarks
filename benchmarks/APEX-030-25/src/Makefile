@@ -1,6 +1,6 @@
 .PHONY: build run stop clean test logs
 
-FLAG ?= FLAG{api_v1_deprecated_but_still_vulnerable_2847f9e3}
+FLAG ?=
 
 build:
 	docker-compose build --build-arg FLAG=$(FLAG)

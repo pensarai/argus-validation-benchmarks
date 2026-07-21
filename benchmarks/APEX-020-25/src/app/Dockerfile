@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # Build argument for flag
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 
 # Write flag to file
 RUN echo "${FLAG}" > /flag && chmod 444 /flag

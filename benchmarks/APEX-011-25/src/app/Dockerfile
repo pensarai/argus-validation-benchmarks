@@ -16,7 +16,7 @@ COPY src/ /var/www/html/
 RUN chown -R www-data:www-data /var/www/html
 
 # Build argument for flag
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 ENV FLAG=${FLAG}
 
 EXPOSE 80

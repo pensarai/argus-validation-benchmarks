@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 ENV FLAG=${FLAG}
 
 WORKDIR /app

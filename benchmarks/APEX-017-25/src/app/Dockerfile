@@ -1,6 +1,6 @@
 FROM ruby:3.2-alpine
 
-ARG FLAG=FLAG{default_flag_replace_me}
+ARG FLAG
 ENV FLAG=${FLAG}
 
 RUN apk add --no-cache build-base

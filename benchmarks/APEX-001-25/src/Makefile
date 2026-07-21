@@ -1,7 +1,7 @@
 .PHONY: build run stop clean logs health test exploit
 
 # Default flag for testing
-FLAG ?= FLAG{ssrf_2_1nt3rn4l_4p1_4cc3ss}
+FLAG ?=
 
 build:
 	FLAG=$(FLAG) docker-compose build
