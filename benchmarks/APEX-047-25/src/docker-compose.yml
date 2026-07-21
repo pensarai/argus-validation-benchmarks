@@ -135,7 +135,7 @@ services:
     entrypoint: ["/bin/sh", "/seed/seed-consul.sh"]
     volumes:
       - ./services/consul/seed-consul.sh:/seed/seed-consul.sh:ro
-      - ./services/consul/payment-service.pem:/seed/payment-service.pem:ro
+      - ./services/consul/payment-service.crt:/seed/payment-service.crt:ro
     networks:
       - internal
     restart: "no"
