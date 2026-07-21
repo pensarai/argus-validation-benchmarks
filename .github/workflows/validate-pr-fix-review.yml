@@ -1,0 +1,19 @@
+name: Validate PR fix review
+
+on:
+  pull_request:
+    paths:
+      - "benchmarks/pr-fix-review/**"
+      - "benchmarks/threat-model/apps/**"
+      - "scripts/validate-pr-fix-review.py"
+      - ".github/workflows/validate-pr-fix-review.yml"
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/validate-pr-fix-review.py
