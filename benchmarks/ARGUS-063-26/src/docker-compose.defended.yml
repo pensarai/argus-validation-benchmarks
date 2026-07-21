@@ -1,0 +1,4 @@
+services:
+  syscall-lab:
+    environment:
+      - POLICY_MODE=defended

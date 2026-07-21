@@ -1,0 +1,4 @@
+services:
+  sandbox-api:
+    environment:
+      - POLICY_MODE=defended

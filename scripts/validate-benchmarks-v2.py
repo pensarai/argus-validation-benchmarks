@@ -174,8 +174,16 @@ def validate_manifest(path: Path) -> list[str]:
         errors.append("services: expected object")
 
     benchmark_dir = path.parents[1]
-    if not (path.parent / "docker-compose.yml").is_file():
-        errors.append("docker-compose.yml: missing")
+    source_dir = path.parent
+    for required_file in ("docker-compose.yml", "benchmark.yaml", "Makefile", "README.md"):
+        if not (source_dir / required_file).is_file():
+            errors.append(f"{required_file}: missing required benchmark file")
+    for name, variant in variants.items():
+        if not isinstance(variant, dict) or not nonempty(variant.get("compose")):
+            continue
+        for compose_file in variant["compose"].split(":"):
+            if not (source_dir / compose_file).is_file():
+                errors.append(f"variants.{name}.compose: {compose_file!r} does not exist")
     ground_truth = benchmark_dir / "expected_results" / "vulnerability.json"
     if not ground_truth.is_file():
         errors.append("expected_results/vulnerability.json: missing canonical ground truth")
