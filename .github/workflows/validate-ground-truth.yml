@@ -3,6 +3,11 @@ name: Validate ground-truth
 on:
   pull_request:
     paths:
+      - "benchmarks/**/benchmark.json"
+      - "benchmarks/**/expected_results/**"
+      - "benchmarks/**/docker-compose*.yml"
+      - "schemas/benchmark-v2.schema.json"
+      - "scripts/validate-benchmarks-v2.py"
       - "benchmarks/threat-model/apps/**"
       - "scripts/validate-ground-truth.py"
       - ".github/workflows/validate-ground-truth.yml"
@@ -16,3 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/validate-ground-truth.py
+      - run: python3 scripts/validate-benchmarks-v2.py
