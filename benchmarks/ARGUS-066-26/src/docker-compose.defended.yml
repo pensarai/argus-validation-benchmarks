@@ -1,0 +1,4 @@
+services:
+  bmc:
+    environment:
+      - POLICY_MODE=defended
