@@ -58,6 +58,7 @@ def execute():
         "--ro-bind", "/bin", "/bin",
         "--ro-bind", "/usr", "/usr",
         "--ro-bind", "/lib", "/lib",
+        "--ro-bind-try", "/lib64", "/lib64",
         "--ro-bind", source, "/plugin",
         "--dir", "/proc",
         "--dev", "/dev",
