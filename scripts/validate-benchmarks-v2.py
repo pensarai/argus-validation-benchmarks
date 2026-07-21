@@ -195,18 +195,24 @@ def main() -> int:
     manifests = sorted(BENCHMARKS.glob("*/src/benchmark.json"))
     v2_count = 0
     failures = 0
+    legacy: list[Path] = []
     for manifest in manifests:
         try:
             is_v2 = json.loads(manifest.read_text()).get("schema_version") == "2.0"
         except (OSError, json.JSONDecodeError):
             is_v2 = False
         if not is_v2:
+            legacy.append(manifest)
             continue
         v2_count += 1
         errors = validate_manifest(manifest)
         for error in errors:
             failures += 1
             print(f"ERROR {manifest.relative_to(ROOT)}: {error}")
+    if "--require-all-v2" in sys.argv[1:] and legacy:
+        for manifest in legacy:
+            failures += 1
+            print(f"ERROR {manifest.relative_to(ROOT)}: manifest has not migrated to schema_version 2.0")
     print(f"Validated {v2_count} v2 benchmark manifest(s): {failures} error(s)")
     return 1 if failures else 0
 

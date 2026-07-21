@@ -7,7 +7,7 @@ COMPOSE = docker-compose
 PROJECT = apex-032-25
 
 # Default flag
-FLAG ?= FLAG{sequelize_operator_injection_orm_bypass_2025}
+FLAG ?=
 
 build:
 	@echo "Building $(PROJECT)..."

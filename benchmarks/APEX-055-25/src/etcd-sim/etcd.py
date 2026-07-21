@@ -7,6 +7,7 @@ from flask import Flask, jsonify, request
 import base64
 import os
 import json
+import time
 
 app = Flask(__name__)
 
@@ -120,6 +121,7 @@ def kv_range():
     If range_end is "\\0" (AA==), returns all keys with the given prefix.
     """
     data = request.get_json() or {}
+    print(json.dumps({'event': 'etcd.unauthenticated.read', 'timestamp': time.time(), 'operation': 'range'}), flush=True)
 
     key_b64 = data.get('key', '')
     range_end_b64 = data.get('range_end', '')
@@ -183,6 +185,7 @@ def kv_range():
 # Helper endpoint: list all keys (debug)
 @app.route('/v3/keys')
 def list_keys():
+    print(json.dumps({'event': 'etcd.unauthenticated.read', 'timestamp': time.time(), 'operation': 'keys'}), flush=True)
     return jsonify({
         "keys": sorted(KV_STORE.keys()),
         "total": len(KV_STORE)

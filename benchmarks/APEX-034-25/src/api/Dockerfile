@@ -7,7 +7,7 @@ RUN npm install --production
 
 COPY src/ ./src/
 
-ARG FLAG="FLAG{c0up0n_st4ck1ng_pr1c3_m4n1pul4t10n}"
+ARG FLAG
 ENV FLAG=${FLAG}
 
 EXPOSE 3000

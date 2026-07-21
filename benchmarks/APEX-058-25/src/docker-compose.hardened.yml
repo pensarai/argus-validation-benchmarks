@@ -1,0 +1,4 @@
+services:
+  nginx-waf-sim:
+    environment:
+      - POLICY_MODE=hardened
