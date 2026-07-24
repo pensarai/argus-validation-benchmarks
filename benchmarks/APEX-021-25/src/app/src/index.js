@@ -1,5 +1,5 @@
 /**
- * APEX-021-25: Redis Command Injection via SSRF
+ * APEX-021-25: Redis Protocol Smuggling via SSRF
  *
  * Main application entry point
  *

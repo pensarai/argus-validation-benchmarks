@@ -25,6 +25,9 @@ RUN apt-get update && apt-get install -y \
 # Set Puppeteer to use installed Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV HOME=/home/botuser
+ENV XDG_CONFIG_HOME=/home/botuser/.config
+ENV XDG_CACHE_HOME=/home/botuser/.cache
 
 WORKDIR /app
 
@@ -38,8 +41,10 @@ RUN npm ci --omit=dev
 COPY src/ ./src/
 
 # Create non-root user
-RUN groupadd -r botuser && useradd -r -g botuser botuser
-RUN chown -R botuser:botuser /app
+RUN groupadd -r botuser && \
+    useradd -r -m -d /home/botuser -g botuser botuser && \
+    mkdir -p /home/botuser/.config /home/botuser/.cache && \
+    chown -R botuser:botuser /app /home/botuser
 
 USER botuser
 
