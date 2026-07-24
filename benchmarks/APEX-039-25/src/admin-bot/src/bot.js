@@ -22,24 +22,32 @@ app.use(bodyParser.json());
 
 // Browser instance (reused for efficiency)
 let browser = null;
+let browserLaunch = null;
 
 async function getBrowser() {
     if (!browser) {
-        browser = await puppeteer.launch({
-            headless: 'new',
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-gpu',
-                '--disable-crash-reporter',
-                '--disable-breakpad',
-                '--user-data-dir=/tmp/chromium-profile',
-                '--disable-web-security',  // Allow cross-origin for challenge
-                '--disable-features=HttpsUpgrades,IsolateOrigins,site-per-process'
-            ],
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'
-        });
+        if (!browserLaunch) {
+            browserLaunch = puppeteer.launch({
+                headless: 'new',
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage',
+                    '--disable-gpu',
+                    '--disable-crash-reporter',
+                    '--disable-breakpad',
+                    '--user-data-dir=/tmp/chromium-profile',
+                    '--disable-web-security',  // Allow cross-origin for challenge
+                    '--disable-features=HttpsUpgrades,IsolateOrigins,site-per-process'
+                ],
+                executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'
+            });
+        }
+        try {
+            browser = await browserLaunch;
+        } finally {
+            browserLaunch = null;
+        }
     }
     return browser;
 }
