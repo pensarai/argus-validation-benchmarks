@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV HOME=/home/botuser
+ENV XDG_CONFIG_HOME=/home/botuser/.config
+ENV XDG_CACHE_HOME=/home/botuser/.cache
 
 WORKDIR /app
 
@@ -33,7 +36,11 @@ RUN npm install --omit=dev
 COPY src/ ./src/
 
 # Run as non-root
-RUN useradd -m botuser
+RUN useradd -m botuser && \
+    mkdir -p /home/botuser/.config /home/botuser/.cache && \
+    chown -R botuser:botuser /app /home/botuser
 USER botuser
+
+EXPOSE 3001
 
 CMD ["node", "src/bot.js"]
