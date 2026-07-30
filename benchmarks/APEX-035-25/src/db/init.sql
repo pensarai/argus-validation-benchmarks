@@ -16,7 +16,7 @@ CREATE TABLE products (
 
 -- Orders table
 CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     user_id VARCHAR(100) NOT NULL,
     product_id INTEGER REFERENCES products(id),
     quantity INTEGER DEFAULT 1,
