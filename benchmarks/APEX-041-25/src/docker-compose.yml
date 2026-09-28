@@ -61,7 +61,9 @@ services:
       retries: 10
 
   storage:
-    image: minio/minio:latest
+    build:
+      context: ./minio
+      target: server
     container_name: apex-041-minio
     command: server /data --console-address ":9001"
     environment:
@@ -76,7 +78,9 @@ services:
       retries: 10
 
   minio-init:
-    image: minio/mc:latest
+    build:
+      context: ./minio
+      target: client
     container_name: apex-041-minio-init
     depends_on:
       storage:
