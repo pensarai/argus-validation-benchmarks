@@ -21,7 +21,9 @@ services:
       timeout: 3s
       retries: 10
   minio:
-    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    build:
+      context: ./minio
+      target: server
     command: ["server", "/data", "--console-address", ":9001"]
     environment:
       - MINIO_ROOT_USER=model-pipeline
