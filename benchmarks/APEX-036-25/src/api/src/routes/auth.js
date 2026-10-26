@@ -5,6 +5,10 @@ const router = express.Router();
 const { users, findUserByUsername } = require('../models/users');
 const { signToken, signTempToken } = require('../utils/jwt');
 
+// Express 4 does not forward rejected async handlers to its error middleware.
+const asyncRoute = (handler) => (req, res, next) =>
+  Promise.resolve().then(() => handler(req, res, next)).catch(next);
+
 /**
  * POST /api/auth/login
  *
@@ -15,10 +19,10 @@ const { signToken, signTempToken } = require('../utils/jwt');
  * to protected resources. The server trusts the client to complete MFA
  * before using protected endpoints.
  */
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+router.post('/login', asyncRoute(async (req, res) => {
+  const { username, password } = req.body ?? {};
 
-  if (!username || !password) {
+  if (typeof username !== 'string' || typeof password !== 'string' || !username || !password) {
     return res.status(400).json({
       error: 'Username and password are required'
     });
@@ -85,7 +89,7 @@ router.post('/login', async (req, res) => {
       role: user.role
     }
   });
-});
+}));
 
 /**
  * POST /api/auth/verify-mfa
@@ -93,8 +97,8 @@ router.post('/login', async (req, res) => {
  * Step 2 of authentication - validates TOTP code
  * Returns full access token
  */
-router.post('/verify-mfa', async (req, res) => {
-  const { code, tempToken } = req.body;
+router.post('/verify-mfa', asyncRoute(async (req, res) => {
+  const { code, tempToken } = req.body ?? {};
 
   if (!code || !tempToken) {
     return res.status(400).json({
@@ -149,7 +153,7 @@ router.post('/verify-mfa', async (req, res) => {
       role: user.role
     }
   });
-});
+}));
 
 /**
  * POST /api/auth/logout
